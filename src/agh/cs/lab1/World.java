@@ -8,12 +8,27 @@ public class World {
         // args - tablica Stringów
 
         out.println("Start");
-        run();
+        run(args);
         out.println("Stop");
 
     }
 
-    public static void run() {
+    public static void run(String[] args) {
         out.println("Do przodu");
+
+        // wypisz wartości wszystkich argumentów tej metody oddzielone przecinkami
+
+        int ctr = 0;
+        for (String arg : args) {
+
+            if (ctr == args.length - 1) {
+                // ostatni wypisuję bez przecinka
+                out.print(arg);
+            }
+            else out.print(arg + ",");
+
+            ctr++;
+        }
+        out.println("");
     }
 }
