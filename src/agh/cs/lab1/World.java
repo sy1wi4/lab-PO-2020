@@ -14,21 +14,22 @@ public class World {
     }
 
     public static void run(String[] args) {
-        out.println("Do przodu");
-
-        // wypisz wartości wszystkich argumentów tej metody oddzielone przecinkami
-
-        int ctr = 0;
         for (String arg : args) {
 
-            if (ctr == args.length - 1) {
-                // ostatni wypisuję bez przecinka
-                out.print(arg);
+            switch(arg) {
+                case "f":
+                    out.println("Zwierzak idzie do przodu");
+                    break;
+                case "b":
+                    out.println("Zwierzak idzie do tyłu");
+                    break;
+                case "r":
+                    out.println("Zwierzak skręca w prawo");
+                    break;
+                case "l":
+                    out.println("Zwierzak skręca w lewo");
+                    break;
             }
-            else out.print(arg + ",");
-
-            ctr++;
         }
-        out.println("");
     }
 }
