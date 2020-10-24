@@ -2,9 +2,10 @@ package agh.cs.lab2;
 
 public enum MapDirection {
     NORTH,
+    EAST,
     SOUTH,
-    WEST,
-    EAST;
+    WEST;
+
 
     public String toString(){
         switch(this) {
@@ -17,13 +18,10 @@ public enum MapDirection {
     }
 
     public MapDirection next(){
-        switch(this) {
-            case NORTH: return EAST;
-            case SOUTH: return WEST;
-            case WEST: return NORTH;
-            case EAST: return SOUTH;
-            default: return null;
-        }
+        // zamiast switch'a
+        int idx = this.ordinal();
+        return this.values()[(idx + 1) % 4];
+
     }
 
     public MapDirection previous(){
