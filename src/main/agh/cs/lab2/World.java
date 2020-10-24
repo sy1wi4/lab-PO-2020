@@ -8,7 +8,11 @@ public class World {
         System.out.println(position2);
         System.out.println(position1.subtract(position2));
 
-        MapDirection dir = MapDirection.SOUTH;
+        System.out.println(position1.equals(position2));
+
+        /*MapDirection dir = MapDirection.SOUTH;
         System.out.println(dir.previous());
+        System.out.println(dir.next());
+         */
     }
 }
