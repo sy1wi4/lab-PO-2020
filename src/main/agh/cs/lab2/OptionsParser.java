@@ -5,7 +5,7 @@ import agh.cs.lab1.Direction;
 import java.util.Arrays;
 
 public class OptionsParser {
-    // ?? statyczna żeby móc ją zawołać w main-ie
+ 
     public static MoveDirection[] parse(String[] args){
         MoveDirection[] dirs = new MoveDirection[args.length];
 
