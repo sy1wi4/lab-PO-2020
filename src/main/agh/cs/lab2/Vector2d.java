@@ -45,10 +45,12 @@ public class Vector2d {
     }
 
     public Vector2d add(Vector2d other){
+        if (other == null) return this;
         return new Vector2d(this.x + other.x, this.y + other.y);
     }
 
     public Vector2d subtract(Vector2d other){
+        if (other == null) return this;
         return new Vector2d(this.x - other.x, this.y - other.y);
     }
 
