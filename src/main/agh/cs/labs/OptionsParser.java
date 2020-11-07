@@ -1,6 +1,4 @@
-package agh.cs.lab2;
-
-import agh.cs.lab1.Direction;
+package agh.cs.labs;
 
 import java.util.Arrays;
 

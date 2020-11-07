@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+package agh.cs.labs;
 
 public enum MapDirection {
     NORTH,
@@ -9,10 +9,10 @@ public enum MapDirection {
 
     public String toString(){
         switch(this) {
-            case NORTH: return "Północ";
-            case SOUTH: return "Południe";
-            case WEST: return "Zachód";
-            case EAST: return "Wschód";
+            case NORTH: return "^";
+            case SOUTH: return "v";
+            case WEST: return "<";
+            case EAST: return ">";
             default: return null;
         }
     }

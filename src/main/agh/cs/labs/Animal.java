@@ -1,36 +1,53 @@
-package agh.cs.lab2;
+package agh.cs.labs;
 
 
 public class Animal {
-    // początkowe wartości przypisane bezpośrednio do pól
-    // można tez w konstruktorze
 
-    private MapDirection orientation = MapDirection.NORTH;
-    private Vector2d position = new Vector2d(2, 2);
+    public MapDirection orientation;
+    public Vector2d position;
+    private IWorldMap map;
 
-    // pomocnicze wektory uniemożliwiające wyjście poza mapę
-    private Vector2d rightCorner = new Vector2d(4,4);
-    private Vector2d leftCorner = new Vector2d(0,0);
+
+    // konstruktor bezparametrowy
+    public Animal(){
+        this.orientation = MapDirection.NORTH;
+        this.position = new Vector2d(2, 2);
+    }
+
+
+    public Animal(IWorldMap map){
+        this();
+        this.map = map;
+    }
+
+
+    public Animal(IWorldMap map, Vector2d initialPosition){
+
+        // dodatkowo określa początkowe położenie zwierzęcia na mapie
+        this(map);
+        this.position = initialPosition;
+    }
 
 
     public String toString() {
-        String orient = this.orientation.toString();
-        String pos = this.position.toString();
 
-        // informacja o położeniu zwierzęcia
-        return pos + " " + orient;
+        // zwraca schematyczną orientację
+        return this.orientation.toString();
     }
+
 
     public MapDirection getOrientation() {
         return this.orientation;
     }
 
+
     public Vector2d getPosition() {
         return this.position;
     }
 
-    public void canMove(Vector2d newPosition) {
-        if (newPosition.precedes(rightCorner) && newPosition.follows(leftCorner))
+
+    public void tryToMove(Vector2d newPosition) {
+        if (this.map.canMoveTo(newPosition))
             this.position = newPosition;
     }
 
@@ -50,13 +67,14 @@ public class Animal {
 
             case FORWARD:
                 newPosition = position.add(orientation.toUnitVector());
-                canMove(newPosition);
+                tryToMove(newPosition);
                 break;
 
             case BACKWARD:
                 newPosition = position.subtract(orientation.toUnitVector());
-                canMove(newPosition);
+                tryToMove(newPosition);
                 break;
+
         }
     }
 }
