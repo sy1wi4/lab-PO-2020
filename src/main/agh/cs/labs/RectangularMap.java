@@ -3,12 +3,10 @@ package agh.cs.labs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RectangularMap implements  IWorldMap{
+public class RectangularMap extends AbstractWorldMap{
 
     private final int width;
     private final int height;
-    public final List<Animal> animals;   // lista zwierząt
-    private final MapVisualizer mapVisualizer;
 
     private final Vector2d leftCorner;
     private final Vector2d rightCorner;
@@ -24,6 +22,7 @@ public class RectangularMap implements  IWorldMap{
 
     }
 
+
     @Override
     // zwierzę nie może wyjść poza mapę ani na zajęte pole
     public boolean canMoveTo(Vector2d position){
@@ -32,19 +31,6 @@ public class RectangularMap implements  IWorldMap{
                 position.precedes(rightCorner) &&
                 !isOccupied(position);
     }
-
-
-    @Override
-    // sprawdza czy dane pole jest zajęte
-    public boolean isOccupied(Vector2d position) {
-        for (Animal animal : animals){
-            if (animal.getPosition().equals(position)){
-                return true;
-            }
-        }
-        return false;
-    }
-
 
 
     @Override
@@ -59,22 +45,14 @@ public class RectangularMap implements  IWorldMap{
 
 
     @Override
-    public boolean place(Animal animal) {
-
-        if (!isOccupied(animal.getPosition())){
-            animals.add(animal);
-            return true;
-        }
-        return false;
+    public Vector2d getLeftCorner(){
+        return leftCorner;
     }
 
 
-
-    // rysuje aktualną konfigurację mapy
-    public String toString(){
-        return mapVisualizer.draw(this.leftCorner, this.rightCorner);
+    @Override
+    public Vector2d getRightCorner(){
+        return rightCorner;
     }
-
-
 
 }

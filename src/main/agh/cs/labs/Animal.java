@@ -1,7 +1,9 @@
 package agh.cs.labs;
 
 
-public class Animal {
+import java.awt.image.ImageConsumer;
+
+public class Animal implements IMapElement {
 
     public MapDirection orientation;
     public Vector2d position;
