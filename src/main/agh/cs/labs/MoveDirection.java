@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+package agh.cs.labs;
 
 public enum MoveDirection {
     FORWARD,
