@@ -1,7 +1,6 @@
 package agh.cs.labs;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
 
 public class RectangularMap extends AbstractWorldMap{
 
@@ -15,7 +14,7 @@ public class RectangularMap extends AbstractWorldMap{
     public RectangularMap(int width, int height){
         this.width = width;
         this.height = height;
-        this.animals  = new ArrayList<>();
+        this.animals  = new LinkedHashMap<>();
         this.mapVisualizer = new MapVisualizer(this);
         this.leftCorner = new Vector2d(0,0);
         this.rightCorner = new Vector2d(width - 1,height - 1);
@@ -26,23 +25,10 @@ public class RectangularMap extends AbstractWorldMap{
     @Override
     // zwierzę nie może wyjść poza mapę ani na zajęte pole
     public boolean canMoveTo(Vector2d position){
-
         return  position.follows(leftCorner) &&
                 position.precedes(rightCorner) &&
                 !isOccupied(position);
     }
-
-
-    @Override
-    public Object objectAt(Vector2d position) {
-        for (Animal animal : animals){
-            if (animal.getPosition().equals(position)){
-                return animal;
-            }
-        }
-        return null;
-    }
-
 
     @Override
     public Vector2d getLeftCorner(){
