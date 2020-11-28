@@ -57,7 +57,8 @@ public class RectangularMapTest {
         Animal animal3  = new Animal(map, pos2);
 
         map.place(animal2);
-        assertFalse(map.place(animal3));
+        Exception ex = assertThrows(IllegalArgumentException.class,
+                () -> map.place(animal3));
 
     }
 

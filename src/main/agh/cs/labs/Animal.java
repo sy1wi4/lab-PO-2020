@@ -55,8 +55,8 @@ public class Animal implements IMapElement {
 
             this.position = newPosition;
             // informuje obserwatorów o zmianie pozycji
-
             positionChanged(oldPosition, newPosition);
+
         }
     }
 

@@ -1,7 +1,6 @@
 package agh.cs.labs;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -55,9 +54,10 @@ public class GrassFieldTest {
     @Test
     public void checkIfNotPlacedOnPositionOccupiedByAnAnimal(){
         Animal animal3  = new Animal(map, pos2);
-
         map.place(animal2);
-        assertFalse(map.place(animal3));
+        Exception ex = assertThrows(IllegalArgumentException.class,
+                () -> map.place(animal3));
+
     }
 
     @Test
