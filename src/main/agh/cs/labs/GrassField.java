@@ -22,6 +22,7 @@ public class GrassField extends AbstractWorldMap{
             int random2 = ThreadLocalRandom.current().nextInt(0, (int) (Math.sqrt(number * 10)) + 1);
             Grass toAdd = new Grass(new Vector2d(random1, random2));
             grassList.put(toAdd.getPosition(),toAdd);
+            boundary.add(toAdd);
         }
     }
 
@@ -48,42 +49,13 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public Vector2d getLeftCorner(){
-
-        Iterator<Vector2d> grassIterator = grassList.keySet().iterator();
-        Iterator<Vector2d> animalsIterator = animals.keySet().iterator();
-        Vector2d first = grassIterator.next();
-        Vector2d second = grassIterator.next();
-
-        Vector2d leftCorner = first.lowerLeft(second);
-
-        while (grassIterator.hasNext()) {
-            leftCorner = leftCorner.lowerLeft(grassIterator.next());
-        }
-        while (animalsIterator.hasNext()) {
-            leftCorner = leftCorner.lowerLeft(animalsIterator.next());
-
-        }
-        return leftCorner;
-
+        return boundary.getLeftCorner();
     }
 
 
     @Override
     public Vector2d getRightCorner() {
-        Iterator<Vector2d> grassIterator = grassList.keySet().iterator();
-        Iterator<Vector2d> animalsIterator = animals.keySet().iterator();
-        Vector2d first = grassIterator.next();
-        Vector2d second = grassIterator.next();
-
-        Vector2d rightCorner = first.upperRight(second);
-
-        while (grassIterator.hasNext()) {
-            rightCorner = rightCorner.upperRight(grassIterator.next());
-        }
-        while (animalsIterator.hasNext()) {
-            rightCorner = rightCorner.upperRight(animalsIterator.next());
-        }
-        return rightCorner;
+        return boundary.getRightCorner();
     }
 
 }

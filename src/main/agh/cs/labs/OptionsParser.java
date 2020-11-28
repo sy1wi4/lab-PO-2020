@@ -3,7 +3,7 @@ package agh.cs.labs;
 import java.util.Arrays;
 
 public class OptionsParser {
-    // ?? statyczna żeby móc ją zawołać w main-ie
+
     public static MoveDirection[] parse(String[] args){
         MoveDirection[] dirs = new MoveDirection[args.length];
 
@@ -35,6 +35,8 @@ public class OptionsParser {
                     dirs[ctr] = MoveDirection.LEFT;
                     ctr++;
                     break;
+                default:
+                    throw new IllegalArgumentException(arg + " is not legal move specification");
             }
         }
         return Arrays.copyOfRange(dirs,0,ctr);

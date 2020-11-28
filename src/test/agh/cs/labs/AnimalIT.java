@@ -33,7 +33,7 @@ public class AnimalIT {
 
     @Test
     public void checkAnimalsMovementCompatibilityAndMapVisualizing(){
-        String[] args = {"b", "b", "f", "r", "java","f", "forward", "x", "b", "l", "r"};
+        String[] args = {"b", "b", "f", "r", "f", "forward", "b", "l", "r"};
         MoveDirection[] dirs1 = OptionsParser.parse(args);
         IEngine engine1 = new SimulationEngine(dirs1, bigMap, positionsBigMap);
         engine1.run();
@@ -58,7 +58,7 @@ public class AnimalIT {
                 ,bigMap.toString());
 
 
-        String[] args2 = {"b", "r", "r", "r", "java","f", "FORWARD", "x", "r", "f", "b","r","l"};
+        String[] args2 = {"b", "r", "r", "r","f", "r", "f", "b","r","l"};
         MoveDirection[] dirs2 = OptionsParser.parse(args2);
         IEngine engine2 = new SimulationEngine(dirs2, smallMap, positionsSmallMap);
         engine2.run();
@@ -90,7 +90,7 @@ public class AnimalIT {
         go(args2, animal);
         assertEquals(NORTH, animal.getOrientation());
 
-        String[] args3 = {"l", "l", "r", "backward", "left", "right", "r", "x", "r"};
+        String[] args3 = {"l", "l", "r", "backward", "left", "right", "r", "r"};
         go(args3, animal);
         assertEquals(EAST, animal.getOrientation());
 
@@ -111,10 +111,6 @@ public class AnimalIT {
         go(args2, animal);
         assertEquals(new Vector2d(3, 2), animal.getPosition());
 
-        String[] args3 = {"x"};
-        go(args3, animal);
-        assertEquals(new Vector2d(3, 2), animal.getPosition());
-
     }
 
     @Test
@@ -123,11 +119,11 @@ public class AnimalIT {
 
         // north
         String[] args1 = {"f", "x", "f", "forward"};
-        go(args1, animal);
-        assertEquals(new Vector2d(2, 4), animal.getPosition());
+        Exception ex = assertThrows(IllegalArgumentException.class,
+                () -> go(args1, animal));
 
         // east & south
-        String[] args2 = {"r", "f", "f", "forward", "left", "b", "b", "backward", "x", "b", "b"};
+        String[] args2 = {"r", "f", "f", "forward", "left", "b", "b", "backward", "b", "b"};
         go(args2, animal);
         assertEquals(new Vector2d(4, 0), animal.getPosition());
 
@@ -145,25 +141,22 @@ public class AnimalIT {
 
         String[] args1 = {"r", "left", "RIGHT", "f", "idk", "b", ""};
         MoveDirection[] expected = {RIGHT, LEFT, FORWARD, BACKWARD};
-        MoveDirection[] actual = OptionsParser.parse(args1);
 
-        assertEquals(4, actual.length);
-        if (actual.length == 4) {
-            for (int i = 0; i < 4; i++) {
-                assertEquals(expected[i], actual[i]);
-            }
-        }
+        Exception ex = assertThrows(IllegalArgumentException.class,
+                () -> OptionsParser.parse(args1));
 
 
-        String[] args2 = {"RIGHT", "java", "", "???", "idk", "back", ":)"};
+
+
+        String[] args2 = {};
         MoveDirection[] actual2 = OptionsParser.parse(args2);
         assertEquals(0, actual2.length);
 
 
         String[] args3 = {"left", "backward", "r", "no", "idk", "b", "Left", "f"};
-        go(args3, animal);
-        assertEquals(new Vector2d(3, 2), animal.getPosition());
-        assertEquals(NORTH, animal.getOrientation());
+
+        Exception ex1 = assertThrows(IllegalArgumentException.class,
+                () -> go(args3, animal));
     }
 
 }
